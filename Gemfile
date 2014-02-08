@@ -18,6 +18,9 @@ gem 'rake'
 
 gem 'shotgun'
 gem 'dotenv'
+gem 'httparty'
+gem 'json'
+gem 'debugger'
 
 group :test do
   gem 'shoulda-matchers'
