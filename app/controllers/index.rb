@@ -6,13 +6,13 @@ get '/' do
 end
 
 get '/oauth-callback' do
-  @token = get_access_token
   get_user_data
-  update_user_data # method to update databse with new transaction and transfers for user
-  redirect '/dashboard'
+  # update_user_data # method to update databse with new transaction and transfers for user
+  # redirect '/dashboard'
+  erb :user_dashboard
 end
 
-get 'dashboard' do
+get '/dashboard' do
 
   erb :user_dashboard
 end
