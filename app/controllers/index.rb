@@ -7,7 +7,7 @@ end
 
 get '/oauth-callback' do
   get_user_data
-  # update_user_data # method to update databse with new transaction and transfers for user
+  update_user_data # method to update database with new transaction and transfers for user
   # redirect '/dashboard'
   erb :user_dashboard
 end

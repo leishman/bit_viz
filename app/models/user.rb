@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
-  # Remember to create a migration!
   has_many :transfers
   has_many :transactions
-
-
+  validates_uniqueness_of :email, :message => "Email has already been used"
 end

@@ -1,4 +1,3 @@
 class Transfer < ActiveRecord::Base
-  # Remember to create a migration!
-  belongs_to :User
+  belongs_to :user
 end

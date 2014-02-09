@@ -1,14 +1,13 @@
 class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
-      t.string :amount
-      t.string :currency
-      t.boolean :request
-      t.string :hsh
-      t.string :status
-      t.string :recipient_email
-      t.string :recipient_name
-      t.string :recipient_address
+      t.belongs_to  :user
+      t.string      :coinbase_id, :unique => true
+      t.datetime    :date_time
+      t.string      :hsh
+      t.integer     :amount, :limit => 8
+      t.string      :recipient_address
+      t.string      :notes
 
       t.timestamps
     end

@@ -7,6 +7,7 @@ helpers do
   end
 
   def sign_in_user
+    p @resp
     email = @resp['current_user']['email']
     p @resp['current_user']
     @user = User.find_by_email(email)
@@ -20,23 +21,20 @@ helpers do
 
   def get_transactions # return array of transactions
     @resp = HTTParty.get("https://coinbase.com/api/v1/transactions?access_token=#{@token}")
-    @resp = JSON.parse(@resp.body)['transactions']
-    # sign_in_user
-    # sessions[:user]
-    # flatten each transaction and stack in array
-    @resp
+    @resp = JSON.parse(@resp.body)
+    sign_in_user
+    # return sub-hash of response, which excludes user info
+    @resp['transactions']
   end
 
   def get_transfers # return array of transfers
     resp = HTTParty.get("https://coinbase.com/api/v1/transfers?access_token=#{@token}")
     JSON.parse(resp.body)['transfers']
-    # flatten each transfer and stack in array
   end
 
   def get_balance # return integer
     resp = HTTParty.get("https://coinbase.com/api/v1/account/balance?access_token=#{@token}")
-    JSON.parse(resp.body)['amount'] # assuming unit is BTC
-    # return balance
+    JSON.parse(resp.body)['amount']
   end
 
   def get_user_data
@@ -49,12 +47,12 @@ helpers do
   def update_user_data
     # Save all transactions that aren't already stored in database
     @transactions.each do |t|
-      # check data before creating
-      Transaction.create(t)
+      # Optimization opp -> check data for overlapping dates before attempting create
+      create_tx(t)
     end
 
     @transfers.each do |t|
-      Transfer.create(t)
+      create_tf(t)
     end
 
   end

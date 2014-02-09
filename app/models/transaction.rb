@@ -1,6 +1,5 @@
 class Transaction < ActiveRecord::Base
-  # Remember to create a migration!
-  belongs_to :User
+  belongs_to :user
 
   def total_sell_price
 
