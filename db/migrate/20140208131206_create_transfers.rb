@@ -3,7 +3,7 @@ class CreateTransfers < ActiveRecord::Migration
     create_table :transfers do |t|
       t.belongs_to  :user
       t.string      :coinbase_id, :unique => true
-      t.string      :type
+      t.string      :order_type
       t.integer     :fees_bank_cents
       t.integer     :fees_coinbase_cents
       t.integer     :btc_amount, :limit => 8

@@ -1,9 +1,12 @@
-<h1>Balance</h1>
-<%= @balance %>
+<div class="continer">
+<div class="jumbotron">
+  <h1>Average Buy Price:</h1>
+   <h2>$<%= @average_buy_price %></h2>
+  <br>
+</div>
 
-<h1>Transfers</h1>
-<%= @transfers %>
-
-<h1>Transactions</h1>
-<%= @transactions %>
-
+  <div id="transaction-hist">
+    <h1>Transaction History</h1><br>
+    <svg class="chart"></svg>
+  </div>
+</div>

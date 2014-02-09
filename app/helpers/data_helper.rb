@@ -8,14 +8,15 @@ helpers do
     output[:amount] = (transaction_hash['amount']['amount'].to_f * 100_000_000).to_i
     output[:recipient_address] = transaction_hash.fetch('recipient_address',"")
     output[:notes] = transaction_hash['notes']
-    output
+
+    @user.transactions << Transaction.create(output)
   end
 
   def create_tf(transfer)
     output = {}
     transfer_hash = transfer['transfer']
     output[:coinbase_id] = transfer_hash['transaction_id']
-    output[:type] = transfer_hash['type']
+    output[:order_type] = transfer_hash['type']
     output[:fees_bank_cents] = transfer_hash['bank']['cents']
     output[:fees_coinbase_cents] = transfer_hash['coinbase']['cents']
     output[:btc_amount] = (transfer_hash['btc']['amount'].to_f * 100_000_000).to_i
@@ -23,6 +24,7 @@ helpers do
     output[:description] = transfer_hash['description']
     output[:date_time] =  DateTime.strptime(transfer_hash['created_at'], '%FT%T%:z')
     output[:payout_date] = DateTime.strptime(transfer_hash['payout_date'], '%FT%T%:z')
-    output
+
+    @user.transfers << Transfer.create(output)
   end
 end

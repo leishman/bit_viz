@@ -45,6 +45,7 @@ helpers do
   end
 
   def update_user_data
+    assign_user
     # Save all transactions that aren't already stored in database
     @transactions.each do |t|
       # Optimization opp -> check data for overlapping dates before attempting create
