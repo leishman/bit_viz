@@ -22,13 +22,17 @@ gem 'httparty'
 gem 'json'
 gem 'debugger'
 
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
+  gem 'capybara'
 end
 
 group :test, :development do
   gem 'rspec'
   gem 'factory_girl'
   gem 'faker'
+  gem 'guard-rspec'
+  gem 'jasmine'
 end

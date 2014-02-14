@@ -12,3 +12,11 @@
   font: 10px sans-serif;
   text-anchor: end;
 }
+
+#transaction-hist{
+	margin-left: 40px;
+}
+
+#average-bp{
+	margin-left: 40px;	
+}

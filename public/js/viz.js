@@ -33,9 +33,9 @@ d3.json('/data', function(error, data){
     .attr("width", barWidth - 1)
     .style("fill", function(d){ return d.value > 0 ? "green" : "red"});
 
-    bar.append("text")
-      .attr("y", function(d) {return y(d.value); })
-      .attr("x", barWidth / 2 - 10)
-      .attr("dy", "0.15em")
-      .text(function(d) {return d.value / 100000000;})
+    // bar.append("text")
+    //   .attr("y", function(d) {return y(d.value); })
+    //   .attr("x", barWidth / 2 - 10)
+    //   .attr("dy", "0.15em")
+    //   .text(function(d) {return d.value / 100000000;})
   });

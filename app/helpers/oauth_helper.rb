@@ -1,22 +1,10 @@
 helpers do
 
+  # Request OAuth access token by sending CLIENT_ID, CLIENT_SECRET, and CALLBACK_URL
   def get_access_token
     code = params["code"]
     resp = HTTParty.post("https://coinbase.com/oauth/token?grant_type=authorization_code&code=#{code}&redirect_uri=#{ENV['CALLBACK_URL']}&client_id=#{ENV['CLIENT_ID']}&client_secret=#{ENV['CLIENT_SECRET']}")
     JSON.parse(resp.body)["access_token"]
-  end
-
-  def sign_in_user
-    p @resp
-    email = @resp['current_user']['email']
-    p @resp['current_user']
-    @user = User.find_by_email(email)
-
-    if @user.nil?
-      @user = User.create({email: email})
-    end
-    session[:user_id] = @user.id
-    session[:user_email] = email
   end
 
   def get_transactions # return array of transactions
@@ -55,6 +43,19 @@ helpers do
     @transfers.each do |t|
       create_tf(t)
     end
-
   end
+
+  def sign_in_user
+    p @resp
+    email = @resp['current_user']['email']
+    p @resp['current_user']
+    @user = User.find_by_email(email)
+
+    if @user.nil?
+      @user = User.create({email: email})
+    end
+    session[:user_id] = @user.id
+    session[:user_email] = email
+  end
+
 end
